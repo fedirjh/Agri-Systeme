@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Logistics;
 
+use App\Benne;
 use App\Transporteur;
 use Livewire\Component;
 
@@ -9,7 +10,7 @@ class TransporteurController extends Component
 {
     // use WithPagination;
     //public $Transporteurs;
-    public $nom, $tel, $cin, $zone, $matricule,$item_id,$deleteId,$type,$garntie,$montant,$rq,$mat,$status,$contrat;
+    public $card_id,$nom, $tel, $cin, $zone, $matricule,$item_id,$deleteId,$type,$garntie,$montant,$rq,$mat,$status,$contrat,$validatedData,$editId;
     public $mode;
     public $rule;
 
@@ -44,6 +45,8 @@ class TransporteurController extends Component
 
     private function resetInputFields(){
         $this->nom = '';
+        $this->editId = '';
+        $this->card_id = '';
         $this->tel = '';
         $this->cin = '';
         $this->zone = '';
@@ -59,11 +62,24 @@ class TransporteurController extends Component
         $this->mat = '';
     }
 
+
+    public function affecter(){
+
+        $item = Transporteur::find($this->editId);
+        $item->card_id = $this->card_id;
+        $item->save();
+        $this->mode = 'list';
+        session()->flash('success', 'Transporteur Affected Successfully.');
+        $this->resetInputFields();
+    }
+
     public function store(){
 
-        $validatedData = $this->validate($this->rule);
+        $this->status = 0;
+        $this->contrat = 0;
 
-        Transporteur::create($validatedData);
+        $this->validatedData = $this->validate($this->rule);
+        Transporteur::create($this->validatedData);
         $this->mode = 'list';
         session()->flash('status','Transporteur Created Successfully.');
         $this->resetInputFields();
@@ -81,9 +97,11 @@ class TransporteurController extends Component
         $this->resetInputFields();
     }
 
-    public function edit($id){
+    public function edit($id,$mode){
 
         $item = Transporteur::findOrFail($id);
+        $this->editId = $item->id;
+        $this->card_id = $item->card_id;
         $this->nom = $item->nom;
         $this->item_id = $item->id;
         $this->tel = $item->tel;
@@ -97,7 +115,7 @@ class TransporteurController extends Component
         $this->mat = $item->mat;
         $this->status = $item->status;
         $this->contrat = $item->contrat;
-        $this->mode = 'edit';
+        $this->mode = $mode;
     }
 
     public function delete(){

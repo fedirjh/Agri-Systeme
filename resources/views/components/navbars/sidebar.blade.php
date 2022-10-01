@@ -98,6 +98,20 @@
             </li>
 
             <li class="nav-item mt-3">
+                <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Parking</h6>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link text-white {{ Route::currentRouteName() == 'parking' ? ' active bg-gradient-primary' : '' }} "
+                   href="{{ route('parking') }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">assignment</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Transactions</span>
+                </a>
+
+
+            <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Management</h6>
             </li>
             <li class="nav-item">

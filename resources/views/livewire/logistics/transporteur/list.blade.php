@@ -131,9 +131,16 @@
                             <div class="ripple-container"></div>
                         </button>
 
-                        <button rel="tooltip" class="btn btn-success btn-link btn-sm mb-0" wire:click="edit({{$transporteur->id }})" data-original-title=""
-                           title="">
+                        <button rel="tooltip" class="btn btn-success btn-link btn-sm mb-0" wire:click="edit({{$transporteur->id }},'edit')" data-original-title=""
+                                title="">
                             <i class="material-icons">edit</i> Edit
+                            <div class="ripple-container"></div>
+                        </button>
+
+                        <button type="button" class="btn btn-warning btn-link btn-sm mb-0"
+                                wire:click="edit({{$transporteur->id }},'affect')" data-original-title=""
+                                title="">
+                            Affecter
                             <div class="ripple-container"></div>
                         </button>
 

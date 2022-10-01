@@ -6,6 +6,8 @@
                 @include('livewire.logistics.transporteur.create')
             @elseif($mode === 'edit')
                 @include('livewire.logistics.transporteur.edit')
+            @elseif($mode === 'affect')
+                @include('livewire.logistics.transporteur.affecter')
             @else
                 @include('livewire.logistics.transporteur.list')
             @endif

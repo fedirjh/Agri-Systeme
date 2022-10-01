@@ -149,24 +149,17 @@
             </div>
 
 
-            <div class="form-group col-12 col-md-6 input-group-outline mt-3 @if(strlen($rq ?? '') > 0) is-filled @endif">
+            <div class="form-group col-12 col-md-6 input-group-outline mt-3">
                 <label for="nom">Remarque</label>
-                <textarea wire:model="rq"
-                          type="text"
-                          class="form-control border border-2 p-2" id="summary-ckeditor"
-                          placeholder="Enter Remarque"
-                          onfocus="focused(this)" onfocusout="defocused(this)"></textarea>
-                @error('rq')
-                <p class='text-danger inputerror'>{{ $message }} </p>
-                @enderror
-
-                @stack('js')
-                <script>
-                    ClassicEditor
-                        .create( document.querySelector( '#summary-ckeditor' ) )
-                        .catch( error => {
-                            console.error( error );
-                        } );    </script>
+                <div wire:ignore>
+                    <div x-data x-ref="quill" x-init="quill = new Quill($refs.quill, {theme: 'snow'});
+                                quill.on('text-change', function () {
+                                    @this.set('rq', quill.root.innerHTML);
+                                });"
+                    >
+                        {!! $rq !!}
+                    </div>
+                </div>
             </div>
 
             <div class="row col-12 col-md-6">

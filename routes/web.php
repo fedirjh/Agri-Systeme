@@ -14,6 +14,7 @@ use App\Http\Livewire\ExampleLaravel\UserProfile;
 use App\Http\Livewire\Logistics\BenneController;
 use App\Http\Livewire\Logistics\TransporteurController;
 use App\Http\Livewire\Notifications;
+use App\Http\Livewire\ParkController;
 use App\Http\Livewire\Profile;
 use App\Http\Livewire\RapportController;
 use App\Http\Livewire\RoleController;
@@ -50,6 +51,9 @@ Route::group(['middleware' => 'admin'], function () {
 
     Route::get('entities', EntityController::class)->name('entities');
     Route::get('livraisons', LivraisonController::class)->name('livraisons');
+
+    Route::get('parking', ParkController::class)->name('parking');
+
     Route::get('rapports', RapportController::class)->name('rapports');
     Route::get('dashboard', Dashboard::class)->name('dashboard');
 

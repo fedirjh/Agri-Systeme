@@ -54,8 +54,9 @@ class AdminController extends Component
             'password_confirmation' => 'required|min:6',
         ]);
 
-        $this->password = Hash::make($this->password);
         $admin = Admin::create($validatedData);
+        $admin->update(['password' => Hash::make($this->password)]);
+
         if ($this->role) {
             $admin->assignRole($this->role);
         }
